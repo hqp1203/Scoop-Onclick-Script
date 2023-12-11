@@ -13,9 +13,9 @@ $env:SCOOP = $scoopPath
 
 # 检测当前用户状态并安装 Scoop
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-    iwr -useb get.scoop.sh | iex
+    iwr -useb scoop.201704.xyz | iex
 } else {
-    iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+    iex "& {$(irm scoop.201704.xyz)} -RunAsAdmin"
 }
 
 # 输出安装完成信息
@@ -29,6 +29,8 @@ scoop install git
 Write-Output "正在添加软件源"
 
 # 添加软件源
+scoop bucket rm *
+scoop bucket add main
 scoop bucket add extras
 scoop bucket add versions
 
